@@ -381,7 +381,7 @@
                     basicBot.room.roulette.rouletteStatus = true;
                     basicBot.room.roulette.countdown = setTimeout(function() {
                         basicBot.room.roulette.endRoulette();
-                    }, 60 * 1000);
+                    }, 120 * 1000);
                     API.sendChat(basicBot.chat.isopen);
                 },
                 endRoulette: function() {
@@ -954,13 +954,13 @@
             var timeLeft = API.getTimeRemaining();
             var timeElapsed = API.getTimeElapsed();
 
-            if (basicBot.settings.voteSkip) {
-                if ((mehs - woots) >= (basicBot.settings.voteSkipLimit)) {
+            if (basicBot.settings.voteSkip) {// Valeurs changées
+                if ((mehs) >= (basicBot.settings.voteSkipLimit)) { // "(mehs - woots)" --> "(mehs)"
                     API.sendChat(subChat(basicBot.chat.voteskipexceededlimit, {
                         name: dj.username,
                         limit: basicBot.settings.voteSkipLimit
                     }));
-                    if (basicBot.settings.smartSkip && timeLeft > timeElapsed) {
+                    if (basicBot.settings.smartSkip && timeLeft > timeElapsed/2) { // "(basicBot.settings.smartSkip && timeLeft > timeElapsed") --> "(basicBot.settings.smartSkip && timeLeft > timeElapsed/2)"
                         basicBot.roomUtilities.smartSkip();
                     } else {
                         API.moderateForceSkip();
@@ -1128,7 +1128,7 @@
 
                     var endcid = API.getMedia().cid;
                     if (startcid === endcid) {
-                        //API.sendChat('Song stuck, skipping...');
+                        API.sendChat('La musique est cassée, skip...'); //Ligne décommentée et traduction.
                         API.moderateForceSkip();
                     }
                 }, remaining + 5000);
@@ -1349,7 +1349,7 @@
                 'hueh', 'hu3', 'brbr', 'heu', 'brbr', 'kkkk', 'spoder', 'mafia', 'zuera', 'zueira',
                 'zueria', 'aehoo', 'aheu', 'alguem', 'algum', 'brazil', 'zoeira', 'fuckadmins', 'affff', 'vaisefoder', 'huenaarea',
                 'hitler', 'ashua', 'ahsu', 'ashau', 'lulz', 'huehue', 'hue', 'huehuehue', 'merda', 'pqp', 'puta', 'mulher', 'pula', 'retarda', 'caralho', 'filha', 'ppk',
-                'gringo', 'fuder', 'foder', 'hua', 'ahue', 'modafuka', 'modafoka', 'mudafuka', 'mudafoka', 'ooooooooooooooo', 'foda'
+                'gringo', 'fuder', 'foder', 'hua', 'ahue', 'modafuka', 'modafoka', 'mudafuka', 'mudafoka', 'ooooooooooooooo', 'foda', 'bite'
             ],
             curses: [
                 'nigger', 'faggot', 'nigga', 'niqqa', 'motherfucker', 'modafocka'
@@ -2069,7 +2069,7 @@
             },
 
             commandsCommand: {
-                command: 'commands',
+                command: ['commands', 'cmd', 'help'],
                 rank: 'user',
                 type: 'exact',
                 functionality: function(chat, cmd) {
